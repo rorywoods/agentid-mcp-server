@@ -1,13 +1,21 @@
 # Basic
 import os
+import fastmcp
 import requests
 from dotenv import load_dotenv
 
 # FastMCP shit
 from fastmcp import FastMCP
+from fastmcp.server.auth.providers.jwt import JWTVerifier
 
 # Load environmental variables
 load_dotenv(override=True)
+
+verifier = JWTVerifier(
+    jwks_uri="https://login.microsoftonline.com/common/discovery/v2.0/keys",
+    issuer=f"https://sts.windows.net/{os.getenv('ENTRA_ID_TENANT_ID')}/",
+    audience="mcp-production-api"
+)
 
 mcp = FastMCP(
     name="WeatherAssistant",

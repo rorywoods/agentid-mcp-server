@@ -36,6 +36,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 export WEATHER_API_KEY="your_api_key_here"
+export ENTRA_ID_TENANT_ID="your_tenant_id_here"
 python server.py
 ````
 
@@ -46,6 +47,6 @@ python server.py
 
 ````bash
 docker buildx build --platform linux/amd64 -t weather-mcp:latest .
-docker run --rm -p 8080:8080 -e WEATHER_API_KEY=YOUR_WEATHER_API_KEY weather-mcp
+docker run --rm -p 8080:8080 -e WEATHER_API_KEY=YOUR_WEATHER_API_KEY -e ENTRA_ID_TENANT_ID=YOUR_TENANT_ID weather-mcp
 ````
 
