@@ -11,11 +11,12 @@ from fastmcp.server.auth.providers.jwt import JWTVerifier
 # Load environmental variables
 load_dotenv(override=True)
 
-verifier = JWTVerifier(
-    jwks_uri="https://login.microsoftonline.com/common/discovery/v2.0/keys",
-    issuer=f"https://sts.windows.net/{os.getenv('ENTRA_ID_TENANT_ID')}/",
-    audience="mcp-production-api"
-)
+# Validate JWT is issued by trusted token
+#verifier = JWTVerifier(
+#    jwks_uri="https://login.microsoftonline.com/common/discovery/v2.0/keys",
+#    issuer=f"https://sts.windows.net/{os.getenv('ENTRA_ID_TENANT_ID')}/",
+#    audience="mcp-production-api"
+#)
 
 mcp = FastMCP(
     name="WeatherAssistant",
@@ -81,4 +82,4 @@ def get_weather(city: str) -> dict:
     }
 
 if __name__ == "__main__":
-    mcp.run("streamable-http", host="0.0.0.0", port=8080, show_banner="My Shitty MCP Server")
+    mcp.run("streamable-http", host="0.0.0.0", port=8080, show_banner="My Shitty MCP Server")#, auth=verifier)
