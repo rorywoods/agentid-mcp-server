@@ -3,6 +3,7 @@ import os
 import fastmcp
 import requests
 from dotenv import load_dotenv
+from mcp.server.auth.middleware.auth_context import get_access_token
 
 # FastMCP shit
 from fastmcp import FastMCP
@@ -44,6 +45,12 @@ def get_weather(city: str) -> dict:
         - Data comes from WeatherAPI current endpoint only (no hourly/daily forecast, no alerts).
         - Units are provided by WeatherAPI
     """
+
+    access_token = get_access_token()
+    if access_token is not None:
+        print(f"JWT: {access_token.token}")
+    else:
+        print("JWT: <none>")
 
 
     try:
